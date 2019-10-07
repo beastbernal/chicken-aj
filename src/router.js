@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Eggs from './views/Eggs.vue'
+import Losses from './views/Losses.vue'
+import Inventory from './views/Inventory.vue'
 
 Vue.use(Router)
 
@@ -8,8 +10,18 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'eggs',
+      component: Eggs
+    },
+    {
+      path: '/losses',
+      name: 'losses',
+      component: Losses
+    },
+    {
+      path: '/inventory',
+      name: 'inventory',
+      component: Inventory
     },
     {
       path: '/about',

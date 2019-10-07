@@ -1,4 +1,4 @@
-# chiken
+# chicken
 
 ## Project setup
 ```
