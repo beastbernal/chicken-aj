@@ -6,14 +6,22 @@
         >   
             <v-card-title primary-title>
                 <div>
-                    Agregue el no. de huevos descartados
-                <!-- Agregue el no. de huevos descartados <span>{{ someDate | moment("dddd, MMMM Do YYYY") }}</span> -->
+                    Agregue el no. de huevos recolectados
                 </div>
             </v-card-title>
             <v-card-text>
-                
+            <b-container fluid>
+                <b-row class="my-1" v-for="type in types" :key="type.id">
+                <b-col sm="3">
+                    <label :for="`type-${type.id}`">Tipo {{ type.label }}:</label>
+                </b-col>
+                <b-col sm="9">
+                    <b-form-input :id="`type-${type.id}`" v-model="type.value" type="number" size="lg"></b-form-input>
+                </b-col>
+                </b-row>
+            </b-container>    
             
-            <v-form v-model="valid">
+            <!-- <v-form v-model="valid">
                 <v-container>
                 <v-col>
                     <v-row
@@ -39,7 +47,7 @@
                     </v-row>
                 </v-col>
                 </v-container>
-            </v-form>
+            </v-form> -->
             </v-card-text>
             <v-card-actions>
                 <v-btn block color="success" dark large @click="sumEggs()">Agregar
@@ -67,6 +75,15 @@ export default {
             v => !!v || 'E-mail is required',
             v => /.+@.+/.test(v) || 'E-mail must be valid',
         ],
+        types: [
+            {value: 0, label: 'Jumbo', id: 'jumbo'},
+            {value: 0, label: 'AAA', id: 'aaa'},
+            {value: 0, label: 'AA', id: 'aa'},
+            {value: 0, label: 'A', id: 'a'},
+            {value: 0, label: 'B', id: 'b'},
+            {value: 0, label: 'C', id: 'c'},
+            {value: 0, label: 'Roto', id: 'roto'},
+        ]
     }),
     methods: {
         sumEggs () {

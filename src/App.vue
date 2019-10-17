@@ -138,17 +138,12 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
-
 export default {
   name: 'App',
   methods: {
     changePath (route) {
       this.$router.push(route)
     }
-  },
-  components: {
-    HelloWorld
   },
   data: () => ({
     icons: [
@@ -174,6 +169,7 @@ export default {
         case 2: return 'brown'
         case 3: return 'indigo'
       }
+      return 'indigo'
     },
     localAttrs () {
       const attrs = {}

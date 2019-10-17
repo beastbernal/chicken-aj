@@ -8,9 +8,16 @@ import router from './router'
 import vuetify from './plugins/vuetify'
 import Vuex from 'vuex'
 import { ValidationProvider } from 'vee-validate'
+import BootstrapVue from 'bootstrap-vue'
+
+// app.js
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 
 Vue.config.productionTip = false
 
+Vue.use(BootstrapVue)
 Vue.use(require('vue-moment'))
 Vue.component('ValidationProvider', ValidationProvider);
 Vue.use(Vuex)
