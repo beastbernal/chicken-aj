@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-toolbar color="yellow" dense style="max-height: 50px;">
+    <v-toolbar color="teal" dense style="max-height: 50px;">
       <v-toolbar-title>
         <v-avatar>
           <img src="./assets/Chicken.png">
@@ -190,5 +190,10 @@ export default {
     margin: 0!Important;
     padding: 0!Important;
   }
-
+  label {
+    font-size: 1.3em;
+    color: darkblue;
+    padding-top: 10px;
+    font-weight: bold;
+  }
 </style>

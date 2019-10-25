@@ -1,22 +1,27 @@
 <template>
-    <div>
+    <div style="padding: 0 0 80px 0;">
         <v-card
             class="mx-auto"
             outlined
         >   
-            <v-card-title primary-title>
-                <div>
-                    Agregue el no. de huevos recolectados
-                </div>
-            </v-card-title>
+            <v-alert
+            text
+            prominent
+            type="warning"
+            icon="mdi-egg"
+            >
+                 Total Huevos Recolectados <strong>{{numEgg}}</strong>
+            </v-alert>
             <v-card-text>
-            <b-container fluid>
-                <b-row class="my-1" v-for="type in types" :key="type.id">
+            <b-container fluid class="pa-0">
+                <b-row  v-for="type in types" :key="type.id">
                 <b-col sm="3">
                     <label :for="`type-${type.id}`">Tipo {{ type.label }}:</label>
                 </b-col>
                 <b-col sm="9">
-                    <b-form-input :id="`type-${type.id}`" v-model="type.value" type="number" size="lg"></b-form-input>
+                    <b-form-input :id="`type-${type.id}`" v-model="type.value" type="number" 
+                    @input="sumEggs()"
+                    size="lg"></b-form-input>
                 </b-col>
                 </b-row>
             </b-container>    
@@ -49,8 +54,17 @@
                 </v-container>
             </v-form> -->
             </v-card-text>
+            <v-alert
+                text
+                dense
+                color="teal"
+                icon="mdi-clock-fast"
+                border="left"
+                >
+                Cada 5 minutos se guardara automaticamente, para terminar el conteo de clic en terminar
+            </v-alert>
             <v-card-actions>
-                <v-btn block color="success" dark large @click="sumEggs()">Agregar
+                <v-btn block color="success" dark large @click="sumEggs()">Terminar
                     <v-icon>mdi-plus</v-icon>
                 </v-btn>
             </v-card-actions>
@@ -62,7 +76,7 @@
 export default {
     data: () => ({
         numEgg: 0,
-        totalEgg: 18,
+        // totalEgg: 18,
         valid: false,
         firstname: '',
         lastname: '',
@@ -87,11 +101,13 @@ export default {
     }),
     methods: {
         sumEggs () {
-            let n = Number.parseInt(this.numEgg)
-            let t = Number.parseInt(this.totalEgg)
-            this.totalEgg = n + t
-            this.numEgg = 0
+            this.numEgg = 0;
+            for (let index = 0; index < this.types.length; index++) {
+                const element = this.types[index];
+                element.value = parseInt(element.value.toString())
+                this.numEgg += element.value; 
+            }
         }
-    },
+    }
 }
 </script>
