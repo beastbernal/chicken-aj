@@ -4,14 +4,30 @@
             class="mx-auto"
             outlined
         >   
+            <div>
             <v-alert
+            class="pa-0"
             text
-            prominent
+            dense
+            type="success"
+            icon="mdi-egg"
+            >
+                <v-icon>mdi-plus</v-icon>
+                Galpon <strong>1</strong>
+                <v-spacer></v-spacer>
+                <v-icon>mdi-plus</v-icon>
+                <v-icon>mdi-calendar-range</v-icon>
+            </v-alert>
+            <v-alert
+            class="pa-0"
+            text
+            dense
             type="warning"
             icon="mdi-egg"
             >
-                 Total Huevos Recolectados <strong>{{numEgg}}</strong>
+                Total Huevos Recolectados <strong>{{numEgg}}</strong>
             </v-alert>
+            </div>
             <v-card-text>
             <b-container fluid class="pa-0">
                 <b-row  v-for="type in types" :key="type.id">
@@ -72,6 +88,7 @@
     </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 
 export default {
     data: () => ({
@@ -104,10 +121,22 @@ export default {
             this.numEgg = 0;
             for (let index = 0; index < this.types.length; index++) {
                 const element = this.types[index];
-                element.value = parseInt(element.value.toString())
+                element.value = Number.isInteger(parseInt(element.value.toString())) ? parseInt(element.value.toString()) : 0;
                 this.numEgg += element.value; 
             }
         }
-    }
+    },
+    computed: mapState({
+        // arrow functions can make the code very succinct!
+        count: state => state.count,
+
+        // passing the string value 'count' is same as `state => state.count`
+        countAlias: 'count',
+
+        // to access local state with `this`, a normal function must be used
+        countPlusLocalState (state) {
+            return state.count + this.localCount
+        }
+    })
 }
 </script>
