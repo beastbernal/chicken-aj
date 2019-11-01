@@ -11,6 +11,7 @@
     "bootstrap-vue": "^2.0.4",
     "core-js": "^2.6.5",
     "moment": "^2.24.0",
+    "moment-timezone": "^0.5.27",
     "vee-validate": "^3.0.10",
     "vue": "^2.6.10",
     "vue-moment": "^4.0.0",

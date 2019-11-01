@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Eggs from './views/Eggs.vue'
 import Losses from './views/Losses.vue'
 import Inventory from './views/Inventory.vue'
+import Shed from './views/Shed.vue'
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ export default new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    }
+    },
+    {
+      path: '/shed',
+      name: 'shed',
+      component: Shed
+    },
   ]
 })
