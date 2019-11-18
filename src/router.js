@@ -11,8 +11,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'eggs',
-      component: Eggs
+      name: 'shed',
+      component: Shed
     },
     {
       path: '/losses',
@@ -33,9 +33,9 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     },
     {
-      path: '/shed',
-      name: 'shed',
-      component: Shed
+      path: '/eggs',
+      name: 'eggs',
+      component: Eggs
     },
   ]
 })

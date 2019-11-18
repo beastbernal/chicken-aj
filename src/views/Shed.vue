@@ -1,5 +1,6 @@
 <template>
     <div>
+        {{shed}}
         <v-alert
         prominent
         type="success"
@@ -18,15 +19,15 @@
                 Galpon {{shed.id}}
             </v-card-title>
             <v-card-text>
-                <b-form @submit="onSubmit" @reset="onReset">
+                <b-form>
                     <b-form-group
-                        id="input-group-1"
                         label="Nombre del Galpon:"
-                        label-for="input-1"
-                        description="We'll never share your email with anyone else."
+                        :label-for="'input-' + shed.id"
+                        description="Escriba un nombre para recordar facilmente el galpon"
                     >
                         <b-form-input
-                        id="input-1"
+                        :id="'input-' + shed.id"
+                        :name="'input-' + shed.id"
                         v-model="shed.label"
                         type="text"
                         required
@@ -34,15 +35,30 @@
                         ></b-form-input>
                     </b-form-group>
 
-                    <b-form-group id="input-group-3" label="Fecha de ingreso:" label-for="input-3">
+                    <b-form-group id="input-group-3" label="Fecha Inicial:" 
+                        :label-for="'d-' + shed.id">
                         <b-form-input
-                        id="input-3"
+                        :id="'d-' + shed.id"
+                        :name="'d-' + shed.id"
                         v-model="shed.initialDate"
                         type="date"
                         required
                         placeholder="Fecha de Ingreso del Galpon"
                         ></b-form-input>
                     </b-form-group>
+
+                    <b-form-group id="input-group-3" label="No. de Gallinas" 
+                        :label-for="'n-' + shed.id">
+                        <b-form-input
+                        :id="'n-' + shed.id"
+                        :name="'n-' + shed.id"
+                        v-model="shed.initialNumber"
+                        type="number"
+                        required
+                        placeholder="No. de Gallinas"
+                        ></b-form-input>
+                    </b-form-group>
+
 
                     <!-- <b-form-group id="input-group-4">
                         <b-form-checkbox-group v-model="form.checked" id="checkboxes-4">
@@ -51,16 +67,19 @@
                         </b-form-checkbox-group>
                     </b-form-group> -->
 
-                    <b-button type="submit" variant="primary">Submit</b-button>
-                    <b-button type="reset" variant="danger">Reset</b-button>
+                    <b-button @click="create(shed)" variant="success">Guardar <v-icon right>mdi-check-circle</v-icon></b-button>
+                    <!-- <b-button type="reset" variant="danger">Reset</b-button> -->
                     </b-form>
             </v-card-text>
         </v-card>
-        {{sheds}}
-        {{basic}}
+        <!-- {{sheds}}
+        {{basic}} -->
+        
     </div>
 </template>
 <script>
+import { mapState } from 'vuex'
+
 export default {
     data: () => ({
         sheds: [],
@@ -78,7 +97,27 @@ export default {
             let b = Object.assign({}, this.basic)
             b.id = this.sheds.length + 1;
             this.sheds.push(b)
+        },
+        create: function(shed){
+            this.$store.commit('edit', shed);
+            this.$router.push('/eggs');
         }
+    },
+    computed: mapState({
+        // arrow functions can make the code very succinct!
+        count: state => state.count,
+        shed: state => state.shed,
+
+        // passing the string value 'count' is same as `state => state.count`
+        countAlias: 'count',
+
+        // to access local state with `this`, a normal function must be used
+        countPlusLocalState (state) {
+            return state.count + this.localCount
+        }
+    }),
+    created() {
+        
     },
 }
 </script>

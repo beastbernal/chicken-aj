@@ -5,7 +5,7 @@
         <v-avatar>
           <img src="./assets/Chicken.png">
         </v-avatar>
-      Los Huevos de AJ
+      Huevos el Viejo
       </v-toolbar-title>
 
       <div class="flex-grow-1"></div>
@@ -23,7 +23,7 @@
         </v-btn>
       </template> -->
     </v-toolbar>
-    <v-content>
+    <v-content style="height: 300vw;">
       <router-view></router-view>
     </v-content>
     <!-- <v-app-bar app>
@@ -45,10 +45,7 @@
       <HelloWorld/>
     </v-content> -->
     <v-footer
-      padless
       fixed
-      absolute
-      
     >
       <v-bottom-navigation
         style="padding-top:10px;"

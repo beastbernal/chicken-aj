@@ -1,5 +1,13 @@
 <template>
     <div style="padding: 0 0 80px 0;">
+        shed
+        {{shed.initialDate}}
+        {{this.$moment()}}
+        today 2019-11-07
+        {{this.$moment(this.today).format('YYYY-MM-DD HH:mm')}}
+        this.$moment(this.today).diff(this.$moment(shed.initialDate), 'week')
+        {{this.$moment(this.today).diff(this.$moment(shed.initialDate), 'week')}}
+        <!-- {{today}} -->
         <v-card
             class="mx-auto"
             outlined
@@ -13,7 +21,7 @@
             icon="mdi-egg"
             >
                 <v-icon>mdi-plus</v-icon>
-                Galpon <strong>1</strong>
+                Galpon <strong>{{shed.id}}</strong>
                 <v-spacer></v-spacer>
                 <v-icon>mdi-plus</v-icon>
                 <v-icon>mdi-calendar-range</v-icon>
@@ -114,7 +122,8 @@ export default {
             {value: 0, label: 'B', id: 'b'},
             {value: 0, label: 'C', id: 'c'},
             {value: 0, label: 'Roto', id: 'roto'},
-        ]
+        ],
+        today: null
     }),
     methods: {
         sumEggs () {
@@ -129,6 +138,7 @@ export default {
     computed: mapState({
         // arrow functions can make the code very succinct!
         count: state => state.count,
+        shed: state => state.shed,
 
         // passing the string value 'count' is same as `state => state.count`
         countAlias: 'count',
@@ -137,6 +147,9 @@ export default {
         countPlusLocalState (state) {
             return state.count + this.localCount
         }
-    })
+    }),
+    created() {
+        this.today = this.$moment();
+    },
 }
 </script>
