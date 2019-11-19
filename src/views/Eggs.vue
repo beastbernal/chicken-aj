@@ -1,31 +1,45 @@
 <template>
     <div style="padding: 0 0 80px 0;">
-        shed
-        {{shed.initialDate}}
+        <!-- shed
+        {{shed}}
         {{this.$moment()}}
         today 2019-11-07
         {{this.$moment(this.today).format('YYYY-MM-DD HH:mm')}}
         this.$moment(this.today).diff(this.$moment(shed.initialDate), 'week')
-        {{this.$moment(this.today).diff(this.$moment(shed.initialDate), 'week')}}
+        {{this.$moment(this.today).diff(this.$moment(shed.initialDate), 'week')}} -->
         <!-- {{today}} -->
         <v-card
             class="mx-auto"
             outlined
         >   
             <div>
-            <v-alert
-            class="pa-0"
-            text
-            dense
-            type="success"
-            icon="mdi-egg"
-            >
-                <v-icon>mdi-plus</v-icon>
-                Galpon <strong>{{shed.id}}</strong>
-                <v-spacer></v-spacer>
-                <v-icon>mdi-plus</v-icon>
-                <v-icon>mdi-calendar-range</v-icon>
-            </v-alert>
+                <b-list-group>
+                    <b-list-group-item variant="primary" class="d-flex justify-content-between align-items-center">
+                        Galpon
+                        <b-badge variant="primary" pill>{{shed.label}}</b-badge>
+                    </b-list-group-item>
+
+                    <b-list-group-item variant="success" class="d-flex justify-content-between align-items-center">
+                        Fecha de Inicio
+                        <b-badge variant="success" pill>{{shed.initialDate}}</b-badge>
+                    </b-list-group-item>
+
+                    <b-list-group-item variant="warning" class="d-flex justify-content-between align-items-center">
+                        No. de Gallinas
+                        <b-badge variant="warning" pill>{{shed.initialNumber}}</b-badge>
+                    </b-list-group-item>
+
+                    <b-list-group-item variant="primary" class="d-flex justify-content-between align-items-center">
+                        No. de semanas
+                        <b-badge variant="warning" pill>{{this.$moment(this.today).diff(this.$moment(shed.initialDate), 'week')}}</b-badge>
+                    </b-list-group-item>
+
+                    <b-list-group-item variant="success" class="d-flex justify-content-between align-items-center">
+                        Indicador de postura
+                        <b-badge variant="success" pill>{{indicator}}%</b-badge>
+                    </b-list-group-item>
+                </b-list-group>
+            
             <v-alert
             class="pa-0"
             text
@@ -146,6 +160,9 @@ export default {
         // to access local state with `this`, a normal function must be used
         countPlusLocalState (state) {
             return state.count + this.localCount
+        },
+        indicator: function () {
+            return (this.numEgg * 100 / this.shed.initialNumber)
         }
     }),
     created() {
